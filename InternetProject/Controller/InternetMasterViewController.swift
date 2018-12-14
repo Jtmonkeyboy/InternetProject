@@ -42,47 +42,50 @@ public class InternetMasterViewController: UITableViewController
     public override func viewDidLoad()
     {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        setupDetailContents()
+        self.clearsSelectionOnViewWillAppear = false
+        
+        if let split = splitViewController
+        {
+            let controllers = split.viewControllers
+            internetDetail = (controllers[controllers.count-1] as! UINavigationController).topViewController as? InternetDetailViewController
+        }
     }
 
-    // MARK: - Table view data source
-
-    public override func numberOfSections(in tableView: UITableView) -> Int
+    // MARK: - Table View
+    
+    public override func viewWillAppear(_ animated: Bool) -> Void
     {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        
+        super.viewWillAppear(animated)
     }
 
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return addresses.count
     }
 
-    /*
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        // Configure the cell...
-
+        let rowText = internetTopics[indexPath.row]
+        cell.textLabel!.text = rowText
         return cell
     }
-    */
 
-    /*
     // Override to support conditional editing of the table view.
-    public override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        internetDetail?.detailAddress = addresses[indexPath.row]
+        internetDetail?.detailTitle = internetTopics[indexPath.row]
+        if(internetDetail != nil)
+        {
+            splitViewController?.showDetailViewController(internetDetail!, sender: nil)
+        }
     }
-    */
 
     /*
     // Override to support editing the table view.
