@@ -26,11 +26,12 @@ public class InternetMasterViewController: UITableViewController
         "Social Media🙆🏽‍♂️"]
         
         addresses = [
-        "www.google.com",
-        "www.google.com",
-        "www.google.com",
-        "www.google.com",
-        "www.google.com"]
+        "https://urbandictionary.com/",
+        "https://google.com/",
+        "http://cnn.com/",
+        "https://canyonsdistrict.org/",
+        "https://ctec.canyonsdistrict.org/",
+        "https://www.instagram.com/"]
         
         if let splitView = splitViewController
         {
@@ -69,7 +70,7 @@ public class InternetMasterViewController: UITableViewController
 
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let rowText = internetTopics[indexPath.row]
         cell.textLabel!.text = rowText
